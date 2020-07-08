@@ -46,15 +46,6 @@ ROOT_URLCONF = 'enviro.urls'
 WSGI_APPLICATION = 'enviro.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-DATABASES = {
-    'default' : {
-        'ENGINE': 'django.db.backends.db',
-        'NAME' : os.path.join(BASE_DIR, 'project.db')
-    }
-}
-
 
 
 # Password validation

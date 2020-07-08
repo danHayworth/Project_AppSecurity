@@ -1,8 +1,6 @@
-import uuid
+
 from django.db import models
-from django.contrib.auth.models import (
-		BaseUserManager, AbstractBaseUser
-	)
+
 
 class CategoryManager(models.Manager):
     def create_category(self, category_name):
@@ -12,94 +10,118 @@ class CategoryManager(models.Manager):
         return category
 
 class QuantityManager(models.Manager):
-    def create_quantity(self, measure, weight):
-        quantity = self.create(measure=measure, weight=weight)
+    def create_quantity(self, measure):
+        quantity = self.create(measure=measure)
         # do something with the book
+        quantity.save()
         return quantity
 
 class ProductManager(models.Manager):
-    def create_product(self, product_name, category_id, brand_name, min_order, max_order, quantity_id):
+    def create_product(self, product_name, brand_name, min_order, max_order,units, quantity_id):
         product =  self.create(
             product_name=product_name, 
             brand_name=brand_name,
-            category_id =category_id,
             min_order=min_order,
             max_order=max_order,
-            quantity_id=quantity_id
+            quantity_id=quantity_id,
+            units=units
             )
+        product.save()
         return product
 
-class UserManager(BaseUserManager):
-    def create_user(self, username, password, first_name, last_name, dob, position):
-        user = self.create(
-            username=username,
-            password=password,
-            first_name=first_name,
-            last_name=last_name,
-            dob=dob,
-            position=position
+class NewUserManager(models.Manager):
+    def create_user (self, username,email, first_name, last_name, position,  password=None ):
+        user = self.model(
+            username = username,
+            email = email,
+            first_name = first_name,
+            last_name = last_name,          
+            position = position
+            
         )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+    def create_superuser(self, username, password, email, position, first_name, last_name):
+        user = self.create_user(username, password, position, email, first_name, last_name)
+        user.is_staff = True
+        user.is_admin = True
+        user.save(using=self._db)
         return user
 
 class UsageManager(models.Manager):
-    def create_usage(self, product_id, date_usage, user_id):
+    def create_usage(self, product_id, date_usage, user_id, quantity):
         usage = self.create(
             product_id=product_id,
             date_usage=date_usage,
-            user_id=user_id
+            user_id=user_id,
+            quantity=quantity
         )
+        usage.save()
         return usage
 
 class SupplierManager(models.Manager):
     def create_usage(self, supplier_name):
          supplier = self.create( supplier_name=supplier_name)
+         supplier.save()
          return supplier
 
 class OrderManager(models.Manager):
-    def create_order(self, date, supplier_id, user_id):
-        order = self.create(date=date,supplier_id=supplier_id,user_id=user_id)
+    def create_order(self, date, supplier_id, user_id, product, quantity):
+        order = self.create(date=date,supplier_id=supplier_id,user_id=user_id, product=product, quantity=quantity)
+        order.save()
         return order
 
-
+class Quantity (models.Model):
+    quantity_id = models.AutoField(primary_key=True)
+    measure = models.CharField(max_length = 15)
+    objects = QuantityManager()
 
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
     category_name = models.CharField(max_length = 20)
     objects = CategoryManager()
 
-class Quantity (models.Model):
-    qunatity_id = models.AutoField(primary_key=True)
-    measure = models.CharField(max_length = 15)
-    weight = models.IntegerField()
-    objects = QuantityManager()
-
 class Product(models.Model):
     product_id = models.AutoField(primary_key=True)
-    category_id = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     product_name = models.CharField(max_length= 50)
     brand_name = models.CharField(max_length = 20)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     min_order = models.IntegerField()
     max_order = models.IntegerField()
-    quantity_id = models.ForeignKey(Quantity, on_delete=models.SET_NULL, null=True)
+    units = models.IntegerField()
+    quantity = models.ForeignKey(Quantity, on_delete=models.SET_NULL, null=True)
     objects = ProductManager()
 
-class User (AbstractBaseUser):
+class User (models.Model):
     user_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length = 15, unique = True)
-    password = models.CharField(max_length = 20)
+    email = models.EmailField()
     first_name = models.CharField(max_length = 20)
     last_name = models.CharField(max_length = 20)
-    dob = models.DateTimeField()
+    dob = models.DateField()
     position = models.CharField(max_length = 25)
     is_admin = models.BooleanField(default = False)
     is_staff = models.BooleanField(default = False)	
-    objects = UserManager()
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email','first_name', 'last_name']
+    objects = NewUserManager()
+
+    def __str__(self):
+        return self.email
+
+    def has_perm(self,perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
 
 class Usage (models.Model):
     usage_id = models.AutoField(primary_key=True)
-    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    quantity = models.ForeignKey(Quantity, on_delete=models.SET_NULL, null=True)
     date_usage = models.DateTimeField(auto_now = True)
-    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     objects = UsageManager()
 
 class Supplier (models.Model):
@@ -110,6 +132,8 @@ class Supplier (models.Model):
 class Order (models.Model):
     order_id = models.AutoField(primary_key = True)
     date = models.DateTimeField(auto_now_add = True)
-    supplier_id = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True)
-    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    quantity = models.ForeignKey(Quantity, on_delete=models.SET_NULL, null=True)
+    supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     objects = OrderManager()

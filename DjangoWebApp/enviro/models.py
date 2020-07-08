@@ -76,14 +76,24 @@ class Quantity (models.Model):
     quantity_id = models.AutoField(primary_key=True)
     measure = models.CharField(max_length = 15)
     objects = QuantityManager()
+    class Meta:
+        verbose_name = "Quantity"
+        verbose_name_plural = 'Quantity'
+    def __str__(self):
+        return self.measure 
 
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
     category_name = models.CharField(max_length = 20)
     objects = CategoryManager()
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = 'Category'
+    def __str__(self):
+        return self.category_name   
 
 class Product(models.Model):
-    product_id = models.AutoField(primary_key=True)
+    product_id = models.AutoField(primary_key=True, verbose_name="product_name")
     product_name = models.CharField(max_length= 50)
     brand_name = models.CharField(max_length = 20)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
@@ -92,6 +102,12 @@ class Product(models.Model):
     units = models.IntegerField()
     quantity = models.ForeignKey(Quantity, on_delete=models.SET_NULL, null=True)
     objects = ProductManager()
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = 'Products'
+    def __str__(self):
+        return self.product_name
+       
 
 class User (models.Model):
     user_id = models.AutoField(primary_key=True)
@@ -108,7 +124,7 @@ class User (models.Model):
     objects = NewUserManager()
 
     def __str__(self):
-        return self.email
+        return (self.first_name + " " + self.last_name)
 
     def has_perm(self,perm, obj=None):
         return True
@@ -123,11 +139,14 @@ class Usage (models.Model):
     date_usage = models.DateTimeField(auto_now = True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     objects = UsageManager()
+   
 
 class Supplier (models.Model):
     supplier_id = models.AutoField(primary_key = True)
     supplier_name = models.CharField(max_length = 30)
     objects = SupplierManager()
+    def __str__(self):
+        return self.supplier_name  
 
 class Order (models.Model):
     order_id = models.AutoField(primary_key = True)

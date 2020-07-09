@@ -19,9 +19,8 @@ urlpatterns = [
     path('', include('flashAsPie.urls')),
     url(r'^sitemap\.xml$', sitemap,
         {'sitemaps': {'cmspages': CMSSitemap}}),
-    url(r'^login/$', login, {'template_name': 'flashAsPie/accounts/login.html'})
-    
-]
+    url(r'^login/$', login, {'template_name': 'flashAsPie/accounts/login.html'})    
+] 
 
 urlpatterns += i18n_patterns(
     url(r'^admin/', admin.site.urls),  # NOQA

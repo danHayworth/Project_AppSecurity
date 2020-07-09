@@ -17,7 +17,7 @@
       {% if products %}
       {% for product in products %}
         <tr>
-          <th scope="row">1</th>
+          <th scope="row">{{product.product_id}}</th>
           <td>{{ product.product_name|capfirst }}</td>        
           <td>{{ product.units}}</td>   
           <td>{{ product.quantity}}</td>

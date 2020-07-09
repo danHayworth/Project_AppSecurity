@@ -17,3 +17,5 @@ admin.site.register(Usage)
 admin.site.register(User)
 admin.site.register(Order)
 admin.site.register(Supplier)
+
+#dan added a comment

@@ -31,6 +31,7 @@ class NewUserManager(models.Manager):
     def create_user (self, username,email, first_name, last_name, position,  password=None ):
         user = self.model(
             username = username,
+            password = password,
             email = email,
             first_name = first_name,
             last_name = last_name,          
@@ -98,6 +99,7 @@ class Product(models.Model):
 class User (models.Model):
     user_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length = 15, unique = True)
+    password = models.CharField(max_length = 35)
     email = models.EmailField()
     first_name = models.CharField(max_length = 20)
     last_name = models.CharField(max_length = 20)

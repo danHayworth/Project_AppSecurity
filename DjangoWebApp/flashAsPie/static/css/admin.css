@@ -14,7 +14,7 @@ a:visited {
     color: black;
 }
 div.breadcrumbs {
-    background: aliceblue;
+    background-color: turquoise;
 }
 #changelist #changelist-search img {
     height: 15px;

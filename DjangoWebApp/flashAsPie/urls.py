@@ -1,10 +1,9 @@
 from django.urls import path
 
-from .views import home, order, products, employee
+from .views import home, order, employee
 
 urlpatterns = [
     path('', home, name='home'),
-    path('products/', products, name='products'),
     path('order/', order, name='order'),
-    path('employee/', employee, name='employee')
+    path('<int:user_id>', employee, name='employee')
 ]

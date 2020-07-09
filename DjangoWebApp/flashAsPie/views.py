@@ -1,9 +1,10 @@
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, render
+
 from .models import Product, User
 
 
-@login_required
+
 def home(request):
     products = Product.objects.all()
     context = {
@@ -12,15 +13,16 @@ def home(request):
 
     return render(request, "home.html", context)
 
-def products(request):
-    return render(request, "products.html", {})
 
-@login_required
+
 def order(request):
     return render(request, "order.html", {})
 
 
 @login_required
 def employee(request, user_id):
-    employee = User.objects.all()
-    return render(request, "employee.html", {})
+    employee = get_object_or_404(User, pk=user_id)
+    context = {
+        'employee' : employee
+    }
+    return render(request, "employee.html", context)

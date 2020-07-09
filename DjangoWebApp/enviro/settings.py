@@ -90,7 +90,7 @@ MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
 STATIC_ROOT = os.path.join(DATA_DIR, 'static')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'enviro', 'static'),
+    os.path.join(BASE_DIR, 'flashAsPie', 'static'),
 )
 SITE_ID = 1
 
@@ -98,7 +98,7 @@ SITE_ID = 1
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'enviro', 'templates'),],
+        'DIRS': [os.path.join(BASE_DIR, 'flashAsPie', 'templates'),],
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
@@ -177,7 +177,9 @@ INSTALLED_APPS = [
     'djangocms_snippet',
     'djangocms_googlemap',
     'djangocms_video',
-    'enviro'
+    'enviro',
+    'flashAsPie'
+
 ]
 
 LANGUAGES = (

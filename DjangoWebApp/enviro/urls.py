@@ -11,17 +11,16 @@ from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.static import serve
 from django.contrib.auth import authenticate, login
-from .views import home, order, products
+
 
 admin.autodiscover()
 
 urlpatterns = [
+    path('', include('flashAsPie.urls')),
     url(r'^sitemap\.xml$', sitemap,
         {'sitemaps': {'cmspages': CMSSitemap}}),
-    url(r'^login/$', login, {'template_name': 'templates/login.html'}),
-    path('', home, name='home'),
-    path('products/', products, name='products'),
-    path('order/', order, name='order')
+    url(r'^login/$', login, {'template_name': 'templates/login.html'})
+    
 ]
 
 urlpatterns += i18n_patterns(

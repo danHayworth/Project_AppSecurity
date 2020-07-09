@@ -15,13 +15,20 @@ class UserAdmin (admin.ModelAdmin):
     search_fields = ('first_name', 'last_name', 'position')
     list_per_page = 25
 
+class OrderAdmin (admin.ModelAdmin):
+    list_display = ('order_id', 'product', 'units', 'quantity','date', 'supplier', 'user')
+    list_display_links = ('order_id', 'date')
+    list_filter = ('date',)
+    search_fields = ('product', 'supplier')
+    list_per_page = 25
+
     # list_editable = ('field') - in case we want editable boolean
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category)
 admin.site.register(Quantity)
 admin.site.register(User, UserAdmin)
-admin.site.register(Order)
+admin.site.register(Order, OrderAdmin)
 admin.site.register(Supplier)
 
 #dan added a comment

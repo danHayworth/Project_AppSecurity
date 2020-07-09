@@ -1,4 +1,4 @@
-
+import _datetime
 from django.db import models
 
 
@@ -17,12 +17,10 @@ class QuantityManager(models.Manager):
         return quantity
 
 class ProductManager(models.Manager):
-    def create_product(self, product_name, brand_name, min_order, max_order,units, quantity_id):
+    def create_product(self, product_name, brand_name,units, quantity_id):
         product =  self.create(
             product_name=product_name, 
             brand_name=brand_name,
-            min_order=min_order,
-            max_order=max_order,
             quantity_id=quantity_id,
             units=units
             )
@@ -49,16 +47,6 @@ class NewUserManager(models.Manager):
         user.save(using=self._db)
         return user
 
-class UsageManager(models.Manager):
-    def create_usage(self, product_id, date_usage, user_id, quantity):
-        usage = self.create(
-            product_id=product_id,
-            date_usage=date_usage,
-            user_id=user_id,
-            quantity=quantity
-        )
-        usage.save()
-        return usage
 
 class SupplierManager(models.Manager):
     def create_usage(self, supplier_name):
@@ -67,8 +55,8 @@ class SupplierManager(models.Manager):
          return supplier
 
 class OrderManager(models.Manager):
-    def create_order(self, date, supplier_id, user_id, product, quantity):
-        order = self.create(date=date,supplier_id=supplier_id,user_id=user_id, product=product, quantity=quantity)
+    def create_order(self, date, supplier_id, user_id, product, quantity, units):
+        order = self.create(date=date,supplier_id=supplier_id,user_id=user_id, product=product, quantity=quantity, units=units)
         order.save()
         return order
 
@@ -97,8 +85,6 @@ class Product(models.Model):
     product_name = models.CharField(max_length= 50)
     brand_name = models.CharField(max_length = 20)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    min_order = models.IntegerField()
-    max_order = models.IntegerField()
     units = models.IntegerField()
     quantity = models.ForeignKey(Quantity, on_delete=models.SET_NULL, null=True)
     objects = ProductManager()
@@ -131,15 +117,7 @@ class User (models.Model):
 
     def has_module_perms(self, app_label):
         return True
-
-class Usage (models.Model):
-    usage_id = models.AutoField(primary_key=True)
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-    quantity = models.ForeignKey(Quantity, on_delete=models.SET_NULL, null=True)
-    date_usage = models.DateTimeField(auto_now = True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    objects = UsageManager()
-   
+  
 
 class Supplier (models.Model):
     supplier_id = models.AutoField(primary_key = True)
@@ -152,7 +130,11 @@ class Order (models.Model):
     order_id = models.AutoField(primary_key = True)
     date = models.DateTimeField(auto_now_add = True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    units = models.IntegerField()
     quantity = models.ForeignKey(Quantity, on_delete=models.SET_NULL, null=True)
     supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     objects = OrderManager()
+    
+    def __str__(self):
+        return self.date.strftime('%d-%m-%y Placed at : %H:%M')

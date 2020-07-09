@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 
-from .models import Product, User
+from .models import Product, User, Order
 
 
 
@@ -16,7 +16,12 @@ def home(request):
 
 
 def order(request):
-    return render(request, "order.html", {})
+    orders = Order.objects.all()
+    context = {
+        "orders": orders
+    }
+
+    return render(request, "order.html", context)
 
 
 @login_required

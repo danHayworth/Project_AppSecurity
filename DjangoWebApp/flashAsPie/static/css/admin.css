@@ -1,0 +1,23 @@
+#header {
+    height: 50px;
+    color: aliceblue;
+    background-color: black;
+}
+
+#branding h1, #branding h2{
+    color: aliceblue;
+    display: inline;
+}
+
+a:link,
+a:visited {
+    color: black;
+}
+div.breadcrumbs {
+    background: aliceblue;
+}
+#changelist #changelist-search img {
+    height: 15px;
+}
+
+

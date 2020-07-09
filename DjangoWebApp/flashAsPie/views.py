@@ -1,14 +1,20 @@
 from django.shortcuts import render
-
 # Create your views here.
 from django.contrib.auth.decorators import login_required
+from .models import Product
 
 
 @login_required
 def home(request):
-    return render(request, "home.html", {})
+    products = Product.objects.all()
 
-def products(request):
+    context = {
+        'products' : products
+    }
+
+    return render(request, "home.html", context)
+
+def products(request, product_id):
     return render(request, "products.html", {})
 
 

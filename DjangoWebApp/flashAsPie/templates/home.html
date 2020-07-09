@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Home Page</h1>
-<p>You are on the home page of a very basic tourism website that lists tours around new zealand provided by various tour agents. You can also find agents information and contact agents directly in case you require tour customization or would like to book in a large tour group.</p>
+<p>Welcome to Flash as Pies.</p>
 <div>
-  {% for tour in tours %}
-    <div class="tourname">
-      <a href="{% url 'tour_detail' tour.id %}">
-        <p><strong>{{ tour.name|capfirst }} </strong></p>
-      </a>
+  {% if products %}
+  {% for product in products %}
+    <div class="productname">    
+      <p><strong>{{ product.product_name|capfirst }} </strong></p>
    </div>
   {% endfor %}
-<br><br>
-  <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+  {% else %}
+  <div class="col-md-12">
+    <h2>There are no products.</h2>
+  </div>
+  {% endif %}
 </div>
 {% endblock %}

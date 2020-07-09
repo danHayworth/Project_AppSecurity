@@ -93,7 +93,7 @@ class Category(models.Model):
         return self.category_name   
 
 class Product(models.Model):
-    product_id = models.AutoField(primary_key=True, verbose_name="product_name")
+    product_id = models.AutoField(primary_key=True, verbose_name="ID")
     product_name = models.CharField(max_length= 50)
     brand_name = models.CharField(max_length = 20)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)

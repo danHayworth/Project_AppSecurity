@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
+from django.shortcuts import redirect
 from .models import Order, Product, User
 
 
@@ -29,3 +30,6 @@ def order(request):
 
 def employee(request):
     return render(request, 'employee.html')
+
+def admin(request):
+    return redirect('admin/')

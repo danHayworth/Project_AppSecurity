@@ -1,6 +1,6 @@
 import _datetime
 from django.db import models
-from django.db.models import auth_user 
+
 
 
 class CategoryManager(models.Manager):

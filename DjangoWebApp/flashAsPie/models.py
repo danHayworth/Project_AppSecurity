@@ -20,7 +20,7 @@ class QuantityManager(models.Manager):
 class ProductManager(models.Manager):
     def create_product(self, product_name, brand_name,units, quantity_id):
         product =  self.create(
-            product_name=product_name, 
+            product_name=product_name,
             brand_name=brand_name,
             quantity_id=quantity_id,
             units=units
@@ -35,7 +35,7 @@ class NewUserManager(models.Manager):
             password = password,
             email = email,
             first_name = first_name,
-            last_name = last_name,          
+            last_name = last_name,
             position = position,
             phone = phone
         )
@@ -70,7 +70,7 @@ class Quantity (models.Model):
         verbose_name = "Quantity"
         verbose_name_plural = 'Quantity'
     def __str__(self):
-        return self.measure 
+        return self.measure
 
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
@@ -80,7 +80,7 @@ class Category(models.Model):
         verbose_name = "Category"
         verbose_name_plural = 'Category'
     def __str__(self):
-        return self.category_name   
+        return self.category_name
 
 class Product(models.Model):
     product_id = models.AutoField(primary_key=True, verbose_name="ID")
@@ -95,7 +95,7 @@ class Product(models.Model):
         verbose_name_plural = 'Products'
     def __str__(self):
         return self.product_name
-       
+
 
 class User (models.Model):
     user_id = models.AutoField(primary_key=True)
@@ -108,7 +108,7 @@ class User (models.Model):
     position = models.CharField(max_length = 25)
     phone = models.CharField(max_length=35)
     is_admin = models.BooleanField(default = False)
-    is_staff = models.BooleanField(default = False)	
+    is_staff = models.BooleanField(default = False)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email','first_name', 'last_name']
     objects = NewUserManager()
@@ -121,7 +121,7 @@ class User (models.Model):
 
     def has_module_perms(self, app_label):
         return True
-  
+
 
 class Supplier (models.Model):
     supplier_id = models.AutoField(primary_key = True)
@@ -139,6 +139,7 @@ class Order (models.Model):
     supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     objects = OrderManager()
-    
+
+    #time when order placed
     def __str__(self):
         return self.date.strftime('%d-%m-%y Placed at : %H:%M')

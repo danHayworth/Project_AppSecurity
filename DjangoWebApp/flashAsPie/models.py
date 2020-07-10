@@ -28,21 +28,21 @@ class ProductManager(models.Manager):
         return product
 
 class NewUserManager(models.Manager):
-    def create_user (self, username,email, first_name, last_name, position,  password=None ):
+    def create_user (self, username,email, first_name, last_name, position, phone,  password=None ):
         user = self.model(
             username = username,
             password = password,
             email = email,
             first_name = first_name,
             last_name = last_name,          
-            position = position
-            
+            position = position,
+            phone = phone
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
-    def create_superuser(self, username, password, email, position, first_name, last_name):
-        user = self.create_user(username, password, position, email, first_name, last_name)
+    def create_superuser(self, username, password, email, position, first_name, phone, last_name):
+        user = self.create_user(username, password, position, email, first_name, last_name, phone)
         user.is_staff = True
         user.is_admin = True
         user.save(using=self._db)
@@ -105,6 +105,7 @@ class User (models.Model):
     last_name = models.CharField(max_length = 20)
     dob = models.DateField()
     position = models.CharField(max_length = 25)
+    phone = models.CharField(max_length=35)
     is_admin = models.BooleanField(default = False)
     is_staff = models.BooleanField(default = False)	
     USERNAME_FIELD = 'username'

@@ -6,6 +6,7 @@
 .topTitle h2{
     text-align: end;
     font-weight: bold;
+    color: #17a2b8;
 }
 .tableView{
     height: 100%;
@@ -17,13 +18,32 @@
     width: 50%;
     max-width: 100%;
     margin: auto;
-    background-color: antiquewhite;
+    
+}
+.table .thead-dark tr{
+    background-color: #17a2b8 !important;
 }
 .logged {
     font-weight: bold;
     color: aliceblue;
     padding-right: 25px;
     padding-top: 10px;
+}
+
+.modal-login .modal-footer {
+	background: #343a40;
+}
+.modal-login h4 {
+    color: aliceblue;
+}
+.modal-login .close {
+    color: aliceblue;
+}
+.modal-login .modal-header {
+	background: #343a40;
+}
+.modal-login .text-muted {
+    color: #17a2b8;
 }
 
 

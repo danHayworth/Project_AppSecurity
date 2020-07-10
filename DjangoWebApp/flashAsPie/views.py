@@ -31,5 +31,5 @@ def order(request):
 def employee(request):
     return render(request, 'employee.html')
 
-def admin(request):
-    return redirect('admin/')
+
+

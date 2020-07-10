@@ -1,7 +1,7 @@
 .topTitle {
     width: 50%;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 .topTitle h2{
     text-align: end;
@@ -18,6 +18,12 @@
     max-width: 100%;
     margin: auto;
     background-color: antiquewhite;
+}
+.logged {
+    font-weight: bold;
+    color: aliceblue;
+    padding-right: 25px;
+    padding-top: 10px;
 }
 
 

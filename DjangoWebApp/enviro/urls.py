@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
-
+from django.conf.urls.static import static
 from cms.sitemaps import CMSSitemap
 from django.conf import settings
 from django.urls import include, path
@@ -19,13 +19,18 @@ urlpatterns = [
     path('', include('flashAsPie.urls')),
     url(r'^sitemap\.xml$', sitemap,
         {'sitemaps': {'cmspages': CMSSitemap}}),
-    url(r'^login/$', login, {'template_name': 'flashAsPie/accounts/login.html'})    
+    url(r'^login/$', login, {'template_name': 'accounts/login.html'})    
 ] 
 
+
+
 urlpatterns += i18n_patterns(
-    url(r'^admin/', admin.site.urls, name='login'),  # NOQA
+    url(r'^admin/', admin.site.urls),  # NOQA
     url(r'^', include('cms.urls')),
 )
+
+
+
 
 # This is only needed when using runserver.
 if settings.DEBUG:

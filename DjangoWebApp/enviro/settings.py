@@ -182,7 +182,8 @@ INSTALLED_APPS = [
     'djangocms_googlemap',
     'djangocms_video',
     'enviro',
-    'flashAsPie'
+    'flashAsPie',
+    'phone_field'
 
 ]
 

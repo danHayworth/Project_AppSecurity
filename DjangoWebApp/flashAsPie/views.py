@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.shortcuts import get_object_or_404, render
-
-from .models import Product, User, Order
-
+from django.views import generic
+from .models import Order, Product, User
 
 
 def home(request):
@@ -24,10 +24,8 @@ def order(request):
     return render(request, "order.html", context)
 
 
-@login_required
-def employee(request, user_id):
-    employee = get_object_or_404(User, pk=user_id)
-    context = {
-        'employee' : employee
-    }
-    return render(request, "employee.html", context)
+# creating the employee view
+
+
+def employee(request):
+    return render(request, 'employee.html')

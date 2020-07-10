@@ -28,7 +28,11 @@
                   </ul>
                 </div>
                 {% if user.is_authenticated %}
-                <p class="logged">Hi {{user.get_full_name }}</p>                 
+                <p class="logged">Hi {{user.get_full_name }}</p>   
+                <form class="form-inline" action="{{ next }}">
+                  <button class="btn  my-2 my-sm-0 btn-info" type="submit">Dashboard</button>
+                </form>      
+
                 <form class="form-inline" action="{% url 'logout' %}">
                   <button class="btn  my-2 my-sm-0 btn-info" type="submit">Logout</button>
                 </form>

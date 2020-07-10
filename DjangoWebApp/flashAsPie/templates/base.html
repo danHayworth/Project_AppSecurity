@@ -24,9 +24,14 @@
                     </li>
                   </ul>
                 </div>
+                {% if user.is_authenticated %}
+                <p class="logged">Hi {{user.get_full_name }}</p>                 
                 <form class="form-inline">
                   <button class="btn  my-2 my-sm-0 btn-info" type="submit">Logout</button></a>
                 </form>
+                {% else %}
+                <button class="btn  my-2 my-sm-0 btn-info" type="submit">Login</button></a>
+                {% endif %}
               </nav>
         {% block content %}
         {% endblock %}

@@ -2,6 +2,7 @@ import _datetime
 from django.db import models
 
 
+
 class CategoryManager(models.Manager):
     def create_category(self, category_name):
         category = self.create(category_name=category_name)

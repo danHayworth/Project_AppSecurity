@@ -1,6 +1,27 @@
-
-.table {
+.topTitle {
     width: 50%;
-    margin: auto;
+    margin: 0 auto;
+    margin-top: 50px;
 }
+.topTitle h2{
+    text-align: end;
+    font-weight: bold;
+}
+.tableView{
+    height: 100%;
+    min-height: 100%;
+    bottom:150px;
+    overflow:auto;
+}
+.table {   
+    width: 50%;
+    max-width: 100%;
+    margin: auto;
+    background-color: antiquewhite;
+}
+
+
+
+
+
 

@@ -19,23 +19,25 @@
         <th scope="col">Date of birth</th>
       </tr>
     </thead>
+
+    {# employee authorization #}
     {% if employees %}
         {% for employee in employees %}
         <tbody>
             <tr>
             <th scope="row">{{employee.user_id}}</th>
-            <td>{{ employee.first_name |capfirst }}</td>        
-            <td>{{ employee.last_name |capfirst}}</td>   
+            <td>{{ employee.first_name |capfirst }}</td>
+            <td>{{ employee.last_name |capfirst}}</td>
             <td>{{ employee.email |lower}}</td>
             <td>{{ employee.phone}}</td>
-            <td>{{ employee.position}}</td>  
-            <td>{{ employee.dob}}</td>         
-            </tr> 
+            <td>{{ employee.position}}</td>
+            <td>{{ employee.dob}}</td>
+            </tr>
         </tbody>
-        {% endfor %} 
+        {% endfor %}
     </table>
-        
-        
+
+    {# non-authorized employees #}
     {% else %}
         <div class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
             <div class="modal-dialog" role="document">
@@ -50,12 +52,12 @@
                     <p><em></em></p>
                     <p><em>This page is visible to admin only.</em></p>
                 </div>
-                <div class="modal-footer">          
+                <div class="modal-footer">
                     <button type="button" class="btn btn-dark" data-dismiss="modal">Ok</button>
                 </div>
                 </div>
-            </div>      
-        </div>  
+            </div>
+        </div>
       {% endif %}
 </div>
 {% endblock %}

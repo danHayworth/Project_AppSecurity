@@ -57,8 +57,8 @@ class SupplierManager(models.Manager):
          return supplier
 
 class OrderManager(models.Manager):
-    def create_order(self, date, supplier_id, user_id, product, quantity, units):
-        order = self.create(date=date,supplier_id=supplier_id,user_id=user_id, product=product, quantity=quantity, units=units)
+    def create_order(self, date, supplier_id, user_id, product, quantity, units, is_ordered):
+        order = self.create(date=date,supplier_id=supplier_id,user_id=user_id, product=product, quantity=quantity, units=units, is_ordered=is_ordered)
         order.save()
         return order
 
@@ -138,6 +138,8 @@ class Order (models.Model):
     quantity = models.ForeignKey(Quantity, on_delete=models.SET_NULL, null=True)
     supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    is_ordered = models.BooleanField(default = False)
+    
     objects = OrderManager()
 
     #time when order placed

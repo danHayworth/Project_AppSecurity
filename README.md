@@ -1,6 +1,6 @@
 # Project_AppSecurity
-# Kitchen Inventory Management Application
-# D & J Tech Solutions
+ Kitchen Inventory Management Application
+ D & J Tech Solutions
 
 Project documentation
 

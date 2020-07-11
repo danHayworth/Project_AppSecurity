@@ -34,7 +34,7 @@ def employee(request):
     context = {
         "employees" : employees
     }
-    return render(request, 'staff.html')
+    return render(request, 'staff.html', context)
 
 
 

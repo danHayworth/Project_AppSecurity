@@ -25,9 +25,15 @@
                     <li class="nav-item">
                       <a class="nav-link" href="{% url 'order' %}">Order</a>
                     </li>
+                    {% if user.is_superuser %}
                     <li class="nav-item">
                       <a class="nav-link" href="{% url 'staff' %}">Employees</a>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link disabled" href="{% url 'staff' %}">Employees</a>
+                    </li>
+                    {% endif %}
                   </ul>
                 </div>
                 {% if user.is_authenticated %}

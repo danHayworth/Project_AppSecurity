@@ -242,4 +242,4 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.filters'
 )
 
-LOGIN_REDIRECT_URL ='/en/admin/'
+LOGIN_REDIRECT_URL ='/'

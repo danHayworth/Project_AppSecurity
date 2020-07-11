@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from .models import Order, Product, User
 
 
+
 def home(request):
     products = Product.objects.all()
     context = {
@@ -29,7 +30,11 @@ def order(request):
 
 
 def employee(request):
-    return render(request, 'employee.html')
+    employees = User.objects.all()
+    context = {
+        "employees" : employees
+    }
+    return render(request, 'staff.html', context)
 
 
 

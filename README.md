@@ -1,5 +1,5 @@
 
- #Kitchen Inventory Management Application
+ # Kitchen Inventory Management Application
  # D & J Tech Solutions
 
 Project documentation

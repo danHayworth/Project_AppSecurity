@@ -2,15 +2,15 @@
  # Kitchen Inventory Management Application
   D & J Tech Solutions
 
-#Project type
+# Project type
 
   Web Application
 
-#Purpose
+# Purpose
 
   This project was created as a tool for Flash as Pies, Gourmet Pie Restaurant. This Web Application fulfills the needs of the owner and staff. 
   
-#Function
+# Function
 
   Inventory: allows users to modify inventory levels throughout the day rather than doing a stock take all in one day.
   
@@ -18,11 +18,11 @@
   
   Staff management: Employee records are held and accessible by authorized admin accounts. 
   
-#Backlog
+# Backlog
 
   Product quantities added to orders will automatically update the stock when the order is delivered. 
   
-#Technologies used
+# Technologies used
 
   Python
   Django Framework

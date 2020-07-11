@@ -10,7 +10,7 @@ urlpatterns = [
     path('', home, name='home'),
     path('order/', order, name='order'),
     path('staff/', employee, name='staff'),
-    path('admin/', admin.site.urls, name='admin'),
+    #path('admin/', admin.site.urls, name='admin'),
 ]
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),

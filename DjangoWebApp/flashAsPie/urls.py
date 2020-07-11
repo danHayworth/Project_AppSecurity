@@ -7,9 +7,7 @@ from enviro import settings
 urlpatterns = [
     path('', home, name='home'),
     path('order/', order, name='order'),
-    path('employee/', employee, name='employee'),
-
-
+    path('staff/', employee, name='staff'),
 ]
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),

@@ -16,12 +16,12 @@ class UserAdmin (admin.ModelAdmin):
     list_per_page = 25
 
 class OrderAdmin (admin.ModelAdmin):
-    list_display = ('order_id', 'product', 'units', 'quantity','date', 'supplier', 'user')
+    list_display = ('order_id', 'product', 'units', 'quantity','date', 'supplier', 'user', 'is_ordered')
     list_display_links = ('order_id', 'date')
-    list_filter = ('date',)
+    list_filter = ('date','is_ordered')
     search_fields = ('product', 'supplier')
     list_per_page = 25
-    list_editable = ('units',) # - in case we want editable boolean
+    list_editable = ('units','is_ordered', 'quantity') # - in case we want editable boolean
 
 
 admin.site.register(Product, ProductAdmin)

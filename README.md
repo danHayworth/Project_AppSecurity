@@ -19,8 +19,11 @@ Backlog
   Product quantities added to orders will automatically update the stock when the order is delivered. 
   
 Technologies used
+  Python
   Django Framework
+  HTML
   Bootstrap
+  CSS
   SQLite
   
  

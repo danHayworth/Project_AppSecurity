@@ -9,7 +9,7 @@
   </div>
   <table class="table">
     <thead class="thead-dark">
-      <tr>       
+      <tr>
         <th scope="col">Product</th>
         <th scope="col">Units</th>
         <th scope="col">Unit of mass</th>
@@ -22,26 +22,27 @@
     <tbody>
       {% if orders %}
       {% for order in orders %}
-        <tr>          
-          <td>{{ order.product |capfirst }}</td>        
-          <td>{{ order.units}}</td>   
+        <tr>
+          <td>{{ order.product |capfirst }}</td>
+          <td>{{ order.units}}</td>
           <td>{{ order.quantity}}</td>
           <td>{{ order.date}}</td>
-          <td>{{ order.supplier}}</td>  
-          {% if user.is_authenticated %}       
+          <td>{{ order.supplier}}</td>
+          {% if user.is_authenticated %}
           <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal{{order.user_id}}">{{order.user}}</button>
-          </td> 
+          </td>
           {% else %}
           <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">{{order.user}}</button>
           </td>
           {% endif %}
+          {# Submitted orders display checkmark #}
           {% if order.is_ordered %}
-          <td> <img src="{% static 'images/tick.png' %}" alt="tick"> </td> 
+          <td> <img src="{% static 'images/tick.png' %}" alt="tick"> </td>
           {% else %}
-          <td></td> 
+          <td></td>
           {% endif %}
-        </tr> 
-        
+        </tr>
+
         <div class="modal fade" id="exampleModal{{order.user_id}}"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="flase">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -55,20 +56,20 @@
                 <p><em>{{ order.user.position }}</em></p>
                 <p><em>{{ order.user.phone }}</em></p>
               </div>
-              <div class="modal-footer">          
+              <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-dismiss="modal">Ok</button>
               </div>
             </div>
-          </div>      
-        </div>             
-      {% endfor %}     
+          </div>
+        </div>
+      {% endfor %}
       {% else %}
       <div class="col-md-12">
         <h2>There are no orders.</h2>
       </div>
       {% endif %}
     </tbody>
-  </table>  
+  </table>
 </div>
 </div>
 {% endblock %}
